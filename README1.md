@@ -2,7 +2,7 @@
 
 
 ## Overview
-    This project is an AI-powered web application built with Streamlit to grade knee osteoarthritis severity from X-ray images. It uses a binary classifier to verify if an uploaded image is a knee X-ray, followed by an ensemble of three deep learning models (DenseNet121, ResNet50, Xception) to predict the osteoarthritis grade: Healthy, Minimal, Doubtful, Moderate, or Severe. The app provides a user-friendly interface with a gradient-styled design and displays predictions with confidence scores and recommendations.Osteoarthritis is a chronic joint disease that results in the degeneration of cartilage and underlying bone, leading to pain, stiffness, and loss of mobility.Early detection is crucial in managing osteoarthritis (OA), as the disease's progression can be slowed or better managed with prompt intervention. There are several methods for diagnosing OA, such as X-ray examination, arthroscopic examination, and MRI examination. X-ray examination is widely available and affordable.The performance of image classification in deep learning has improved substantially because of increased computing power, large datasets that have been made available to the public, and the development of convolution neural networks (CNNs). Unlike conventional machine learning approaches, deep learning extracts and learns features from data on its own without human intervention. Hence, it is possible to make a more objective, consistent, and accurate diagnosis of knee OA using an automated measurement system that is based on deep learning.
+This project is an AI-powered web application built with Streamlit to grade knee osteoarthritis severity from X-ray images. It uses a binary classifier to verify if an uploaded image is a knee X-ray, followed by an ensemble of three deep learning models (DenseNet121, ResNet50, Xception) to predict the osteoarthritis grade: Healthy, Minimal, Doubtful, Moderate, or Severe. The app provides a user-friendly interface with a gradient-styled design and displays predictions with confidence scores and recommendations.Osteoarthritis is a chronic joint disease that results in the degeneration of cartilage and underlying bone, leading to pain, stiffness, and loss of mobility.Early detection is crucial in managing osteoarthritis (OA), as the disease's progression can be slowed or better managed with prompt intervention. There are several methods for diagnosing OA, such as X-ray examination, arthroscopic examination, and MRI examination. X-ray examination is widely available and affordable.The performance of image classification in deep learning has improved substantially because of increased computing power, large datasets that have been made available to the public, and the development of convolution neural networks (CNNs). Unlike conventional machine learning approaches, deep learning extracts and learns features from data on its own without human intervention. Hence, it is possible to make a more objective, consistent, and accurate diagnosis of knee OA using an automated measurement system that is based on deep learning.
 
 ## Public Datasets
 ![Publically available datasets](image.png)
@@ -31,98 +31,101 @@ Use GradCAM to visualize influential image regions for predictions, ensuring tra
 ![Methodology](image-1.png)
 
 ## Preprocessing
-### preprocessing steps applied to the knee X-ray images to prepare for model training(find the required files in pre-processing folder):
-#### Image Enhancement(): 
+preprocessing steps applied to the knee X-ray images to prepare for model training(find the required files in pre-processing folder):
+### Image Enhancement: 
 Use Contrast Limited Histogram Equalization (CLAHE) to enhance contrast and standardize pixel intensity values, reducing variability across images.
 #### CLAHE 
 ![CLAHE](image-2.png)
-#### Noise removal:
+### Noise removal:
 Median filter is effective against salt-and-pepper noise (random white and black pixels)
 #### median filter
 ![Median filter](image-3.png)
-#### Data Augmentation: 
+### Data Augmentation: 
 Apply geometric transformations such as rotation (at various angles) and horizontal flipping to increase dataset diversity and improve model generalization.
-#### Image Resizing: 
+### Image Resizing: 
 Resize all images to a uniform size of 224x224 pixels to ensure consistency for model input.
 
+## Model Training
+The training process for the deep learning models is summarized below:
+### Model Architectures: 
+Train five models— ResNet50, Xception, InceptionResNet V2, EfficientNet B0, and DenseNet121 —using transfer learning with pre-trained weights from ImageNet.
+### Fine-Tuning: 
+Make all layers trainable and add a custom classifier head with GlobalAveragePooling2D, Dropout (0.2), and a Dense layer with softmax activation for 5-class classification (Healthy, Doubtful, Minimal, Moderate, Severe).
+### Training Setup: 
+Use the Adam optimizer along with a dynamic learning rate scheduler (ReduceLROnPlateau) to adapt learning rates based on validation loss trends and train on a dataset of knee X-ray images labeled with Kellgren-Lawrence grades, leveraging data augmentation to handle class imbalance. Multiple experiments were conducted using a variety of batch sizes—4, 6, 8, 16, 32, and 256—selected based on GPU memory constraints and optimization efficiency. Similarly, different epoch settings (50, 100, and 150) were tested, with early stopping implemented based on validation loss to prevent overfitting and reduce unnecessary training time
+### Weights Saving: 
+Save model weights after training (e.g., 100 epochs org dataset DenseNet121_ft.hdf5, model_ResNet50_ft.hdf5, model_Xception_ft.hdf5) for reuse.
 
-
-Model Training
-    * The training process for the deep learning models is summarized below:
-        * Model Architectures: 
-            Train five models— ResNet50, Xception, InceptionResNet V2, EfficientNet B0, and DenseNet121 —using transfer learning with pre-trained weights from ImageNet.
-        * Fine-Tuning: 
-            Make all layers trainable and add a custom classifier head with GlobalAveragePooling2D, Dropout (0.2), and a Dense layer with softmax activation for 5-class classification (Healthy, Doubtful, Minimal, Moderate, Severe).
-        * Training Setup: 
-            Use the Adam optimizer along with a dynamic learning rate scheduler (ReduceLROnPlateau) to adapt learning rates based on validation loss trends and train on a dataset of knee X-ray images labeled with Kellgren-Lawrence grades, leveraging data augmentation to handle class imbalance. Multiple experiments were conducted using a variety of batch sizes—4, 6, 8, 16, 32, and 256—selected based on GPU memory constraints and optimization efficiency. Similarly, different epoch settings (50, 100, and 150) were tested, with early stopping implemented based on validation loss to prevent overfitting and reduce unnecessary training time
-        * Weights Saving: 
-            Save model weights after training (e.g., 100 epochs org dataset DenseNet121_ft.hdf5, model_ResNet50_ft.hdf5, model_Xception_ft.hdf5) for reuse.
-
-
-
-
-Evaluation
-    * The performance of the models was evaluated using the following methods:
-        * Metrics: 
-            Assess models using accuracy (proportion of correct predictions), precision (ratio of correct positive predictions), recall (ratio of correctly identified positives), and support (number of instances per class).
-            ![Densenet121 graph](image-4.png)
-            ![Resnet50 graph](image-5.png)
-            ![Xception graph](image-6.png)
-            ![densenet121 confusion matrix](image-7.png)
-            ![Resnet50 confusion matrix](image-8.png)
-            ![Xception confusion matrix](image-9.png)
-
-            
-        * Validation: 
-            Test on unseen data to ensure generalizability, using confusion matrices to analyze class-wise performance.
-        * Interpretability: 
-            Apply GradCAM to generate heatmaps, visualizing regions of the X-ray images (e.g., joint space, osteophytes) that influence predictions, ensuring alignment with radiological standards.
-            ![xception gradcam(test data-severe)](image-10.png)
+## Evaluation
+The performance of the models was evaluated using the following methods:
+### Metrics: 
+Assess models using accuracy (proportion of correct predictions), precision (ratio of correct positive predictions), recall (ratio of correctly identified positives), and support (number of instances per class).
+#### Densenet121 graph
+![Densenet121 graph](image-4.png)
+#### Resnet50 graph
+![Resnet50 graph](image-5.png)
+#### Xception graph
+![Xception graph](image-6.png)
+#### densenet121 confusion matrix graph
+![densenet121 confusion matrix](image-7.png)
+#### Resnet50 confusion matrix graph
+![Resnet50 confusion matrix](image-8.png)
+#### Xception confusion matrix graph
+![Xception confusion matrix](image-9.png)
+### Validation: 
+Test on unseen data to ensure generalizability, using confusion matrices to analyze class-wise performance.
+### Interpretability: 
+Apply GradCAM to generate heatmaps, visualizing regions of the X-ray images (e.g., joint space, osteophytes) that influence predictions, ensuring alignment with radiological standards.
+#### xception gradcam(test data-severe)
+![xception gradcam(test data-severe)](image-10.png)
         
+## Deployment
+The deployment process for the knee osteoarthritis detection system includes:
+### Model Saving and Loading: 
+Save trained model weights using model.model_ft.save(save_model_ft) and load them into reconstructed DenseNet121, ResNet50, and Xception models during deployment.
+### Ensemble Prediction: 
+Combine predictions from the three models by averaging their class probabilities, reducing variance and improving accuracy.
+### Streamlit App: 
+Deploy the ensemble model via a Streamlit web app, featuring a sidebar for image uploads, a main panel for displaying predictions (KL grade, confidence score, probability chart), and tailored recommendations (e.g., medications, physiotherapy).
+#### main UI
+![main UI](image-11.png)
+#### Frontend for prediction
+![Frontend for prediction](image-12.png)
+#### Frontend for classification
+![frontend for classification](image-13.png)
+### User Interaction: 
+Allow users to upload X-ray images (JPEG/PNG, up to 200 MB), trigger predictions with a "Predict" button, and view results with visual aids like a horizontal bar chart of probabilities.
+
+## Features
+### Knee X-ray Verification: 
+A binary classifier ensures the uploaded image is a valid knee X-ray.
+### Ensemble Prediction: 
+Combines DenseNet121, ResNet50, and Xception models for robust grading.
+### Interactive UI: 
+Streamlit-based interface with a sidebar for image uploads and a two-column layout for input and analysis.
+### Visualizations: 
+Displays prediction probabilities as a horizontal bar chart using Plotly.
+### Recommendations: 
+Suggests precautions or medications based on the predicted grade.
+### Training and Testing Scripts: 
+Includes scripts for model training (densenet121.py, ResNet50.py, etc.) and data handling (script to name the images in dataset-created for building a binary classifier (dataset.py)).
+
+## Prerequisites
+### Python 3.10/3.11
+### Conda (recommended for managing the virtual environment)
+### Model files: 
+knee_xray_classifier1.keras
+100 epochs org dataset DenseNet121_ft.hdf5
+model_ResNet50_ft.hdf5
+model_Xception_ft.hdf5
+### Icon file:
+mdc.png
+### dataset
 
 
-Deployment
-    * The deployment process for the knee osteoarthritis detection system includes:
-        * Model Saving and Loading: 
-            Save trained model weights using model.model_ft.save(save_model_ft) and load them into reconstructed DenseNet121, ResNet50, and Xception models during deployment.
-        * Ensemble Prediction: 
-            Combine predictions from the three models by averaging their class probabilities, reducing variance and improving accuracy.
-        * Streamlit App: 
-            Deploy the ensemble model via a Streamlit web app, featuring a sidebar for image uploads, a main panel for displaying predictions (KL grade, confidence score, probability chart), and tailored recommendations (e.g., medications, physiotherapy).
-            ![main UI](image-11.png)
-            ![Frontend for prediction](image-12.png)
-            ![frontend for classification](image-13.png)
-        * User Interaction: 
-            Allow users to upload X-ray images (JPEG/PNG, up to 200 MB), trigger predictions with a "Predict" button, and view results with visual aids like a horizontal bar chart of probabilities.
 
-
-
-Features
-
-    * Knee X-ray Verification: A binary classifier ensures the uploaded image is a valid knee X-ray.
-    * Ensemble Prediction: Combines DenseNet121, ResNet50, and Xception models for robust grading.
-    * Interactive UI: Streamlit-based interface with a sidebar for image uploads and a two-column layout for input and analysis.
-    * Visualizations: Displays prediction probabilities as a horizontal bar chart using Plotly.
-    * Recommendations: Suggests precautions or medications based on the predicted grade.
-    * Training and Testing Scripts: Includes scripts for model training (densenet121.py, ResNet50.py, etc.) and data handling (script to name the images in dataset-created for building a binary classifier (dataset.py)).
-
-
-
-Prerequisites
-    * Python 3.10/3.11
-    * Conda (recommended for managing the virtual environment)
-    * Model files: 
-        knee_xray_classifier1.keras
-        100 epochs org dataset DenseNet121_ft.hdf5
-        model_ResNet50_ft.hdf5
-        model_Xception_ft.hdf5
-    * Icon file:
-        mdc.png
-    * dataset
-
-
-
-Project Structure
+## Project Structure
+```
     knee-osteoarthritis-grading/
     ├── app/
     │   ├── app.py             # Main Streamlit application
@@ -154,7 +157,7 @@ Project Structure
     │   ├── Xception.py        # Training script for Xception model
     │   ├── Xception_testing_script.py        # Testing script for Xception model
     ├── README.md              # Project documentation
-
+```
 usage:
     * clone the repo
     * install conda or miniconda
