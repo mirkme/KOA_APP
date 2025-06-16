@@ -15,34 +15,35 @@ The methodology for knee osteoarthritis detection and severity classification in
 The size of the datasets used for the project is 8,260 images from the source https://data.mendeley.com/datasets/56rmx5bjcr/1
            
 ### Data Augmentation & Preprocessing: 
-            Apply preprocessing techniques like Contrast Limited Histogram Equalization for normalization, and augment data with rotation and horizontal flipping to enhance dataset diversity and ensure uniformity in image size.
-        * Feature Extraction: 
-            Use deep learning models (Xception, DenseNet121, ResNet50) to extract key features like bone structure and joint space from X-ray images for effective severity classification.
-        * Ensemble Implementation: 
-            Combine predictions from Xception, DenseNet121, and ResNet50 using a mix voting technique (hard and soft voting) to improve accuracy and robustness in OA detection.
-        * Severity Detection: 
-            Classify OA severity into five Kellgren-Lawrence grades (Healthy, Doubtful, Minimal, Moderate, Severe) based on structural changes in X-ray images.
-        * Evaluation: 
-            Assess model performance using metrics like accuracy, precision, recall, and support to ensure reliability and generalizability on unseen data.
-        * Interpretation & Validation: 
-            Use GradCAM to visualize influential image regions for predictions, ensuring transparency and alignment with radiological standards.
+Apply preprocessing techniques like Contrast Limited Histogram Equalization for normalization, and augment data with rotation and horizontal flipping to enhance dataset diversity and ensure uniformity in image size.
+### Feature Extraction: 
+Use deep learning models (Xception, DenseNet121, ResNet50) to extract key features like bone structure and joint space from X-ray images for effective severity classification.
+### Ensemble Implementation: 
+Combine predictions from Xception, DenseNet121, and ResNet50 using a mix voting technique (hard and soft voting) to improve accuracy and robustness in OA detection.
+### Severity Detection: 
+Classify OA severity into five Kellgren-Lawrence grades (Healthy, Doubtful, Minimal, Moderate, Severe) based on structural changes in X-ray images.
+### Evaluation: 
+Assess model performance using metrics like accuracy, precision, recall, and support to ensure reliability and generalizability on unseen data.
+### Interpretation & Validation: 
+Use GradCAM to visualize influential image regions for predictions, ensuring transparency and alignment with radiological standards.
 
+## methodology
 ![Methodology](image-1.png)
 
-
-
-Preprocessing
-    * preprocessing steps applied to the knee X-ray images to prepare for model training(find the required files in pre-processing folder):
-        * Image Enhancement(): 
-            Use Contrast Limited Histogram Equalization (CLAHE) to enhance contrast and standardize pixel intensity values, reducing variability across images.
-            ![CLAHE](image-2.png)
-        * Noise removal:
-            Median filter is effective against salt-and-pepper noise (random white and black pixels)
-            ![Median filter](image-3.png)
-        * Data Augmentation: 
-            Apply geometric transformations such as rotation (at various angles) and horizontal flipping to increase dataset diversity and improve model generalization.
-        * Image Resizing: 
-            Resize all images to a uniform size of 224x224 pixels to ensure consistency for model input.
+## Preprocessing
+### preprocessing steps applied to the knee X-ray images to prepare for model training(find the required files in pre-processing folder):
+#### Image Enhancement(): 
+Use Contrast Limited Histogram Equalization (CLAHE) to enhance contrast and standardize pixel intensity values, reducing variability across images.
+#### CLAHE 
+![CLAHE](image-2.png)
+#### Noise removal:
+Median filter is effective against salt-and-pepper noise (random white and black pixels)
+#### median filter
+![Median filter](image-3.png)
+#### Data Augmentation: 
+Apply geometric transformations such as rotation (at various angles) and horizontal flipping to increase dataset diversity and improve model generalization.
+#### Image Resizing: 
+Resize all images to a uniform size of 224x224 pixels to ensure consistency for model input.
 
 
 
