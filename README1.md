@@ -1,22 +1,20 @@
 ## Knee Osteoarthritis Grading App ##
 
 
-Overview
-    This project is an AI-powered web application built with Streamlit to grade knee osteoarthritis severity from X-ray images. It uses a binary classifier to verify if an uploaded image is a knee X-ray, followed by an ensemble of three deep learning models (DenseNet121, ResNet50, Xception) to predict the osteoarthritis grade: Healthy, Minimal, Doubtful, Moderate, or Severe. The app provides a user-friendly interface with a gradient-styled design and displays predictions with confidence scores and recommendations.Osteoarthritis is a chronic joint disease that results in the degeneration of cartilage and underlying bone, leading to pain, stiffness, and loss of mobility.Early detection is crucial in managing osteoarthritis (OA), as the disease's progression can be slowed or better managed with prompt intervention. There are several methods for diagnosing OA, such as X-ray examination, arthroscopic examination, and MRI examination. X-ray examination is widely available and affordable.The performance of image classification in deep learning has improved substantially because of increased computing power, large datasets that have been made available to the public, and the
-    development of convolution neural networks (CNNs). Unlike conventional machine learning
-    approaches, deep learning extracts and learns features from data on its own without human
-    intervention. Hence, it is possible to make a more objective, consistent, and accurate diagnosis of knee OA using an automated measurement system that is based on deep learning.
+## Overview
+    This project is an AI-powered web application built with Streamlit to grade knee osteoarthritis severity from X-ray images. It uses a binary classifier to verify if an uploaded image is a knee X-ray, followed by an ensemble of three deep learning models (DenseNet121, ResNet50, Xception) to predict the osteoarthritis grade: Healthy, Minimal, Doubtful, Moderate, or Severe. The app provides a user-friendly interface with a gradient-styled design and displays predictions with confidence scores and recommendations.Osteoarthritis is a chronic joint disease that results in the degeneration of cartilage and underlying bone, leading to pain, stiffness, and loss of mobility.Early detection is crucial in managing osteoarthritis (OA), as the disease's progression can be slowed or better managed with prompt intervention. There are several methods for diagnosing OA, such as X-ray examination, arthroscopic examination, and MRI examination. X-ray examination is widely available and affordable.The performance of image classification in deep learning has improved substantially because of increased computing power, large datasets that have been made available to the public, and the development of convolution neural networks (CNNs). Unlike conventional machine learning approaches, deep learning extracts and learns features from data on its own without human intervention. Hence, it is possible to make a more objective, consistent, and accurate diagnosis of knee OA using an automated measurement system that is based on deep learning.
 
+## Public Datasets
 ![Publically available datasets](image.png)
 
 
 
-Methodology
-    * The methodology for knee osteoarthritis detection and severity classification includes the following steps:
-        * Data Collection:
-           The size of the datasets used for the project is 8,260 images from the source https://data.mendeley.com/datasets/56rmx5bjcr/1
+## Methodology
+The methodology for knee osteoarthritis detection and severity classification includes the following steps:
+### Data Collection:
+The size of the datasets used for the project is 8,260 images from the source https://data.mendeley.com/datasets/56rmx5bjcr/1
            
-        * Data Augmentation & Preprocessing: 
+### Data Augmentation & Preprocessing: 
             Apply preprocessing techniques like Contrast Limited Histogram Equalization for normalization, and augment data with rotation and horizontal flipping to enhance dataset diversity and ensure uniformity in image size.
         * Feature Extraction: 
             Use deep learning models (Xception, DenseNet121, ResNet50) to extract key features like bone structure and joint space from X-ray images for effective severity classification.
