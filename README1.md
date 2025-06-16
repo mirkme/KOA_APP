@@ -15,6 +15,7 @@ Methodology
     * The methodology for knee osteoarthritis detection and severity classification includes the following steps:
         * Data Collection:
            The size of the datasets used for the project is 8,260 images from the source https://data.mendeley.com/datasets/56rmx5bjcr/1
+           
         * Data Augmentation & Preprocessing: 
             Apply preprocessing techniques like Contrast Limited Histogram Equalization for normalization, and augment data with rotation and horizontal flipping to enhance dataset diversity and ensure uniformity in image size.
         * Feature Extraction: 
@@ -37,13 +38,9 @@ Preprocessing
         * Image Enhancement(): 
             Use Contrast Limited Histogram Equalization (CLAHE) to enhance contrast and standardize pixel intensity values, reducing variability across images.
             ![CLAHE](image-2.png)
-
-            
         * Noise removal:
             Median filter is effective against salt-and-pepper noise (random white and black pixels)
             ![Median filter](image-3.png)
-
-            
         * Data Augmentation: 
             Apply geometric transformations such as rotation (at various angles) and horizontal flipping to increase dataset diversity and improve model generalization.
         * Image Resizing: 
@@ -70,20 +67,10 @@ Evaluation
         * Metrics: 
             Assess models using accuracy (proportion of correct predictions), precision (ratio of correct positive predictions), recall (ratio of correctly identified positives), and support (number of instances per class).
             ![Densenet121 graph](image-4.png)
-
-            
             ![Resnet50 graph](image-5.png)
-
-            
             ![Xception graph](image-6.png)
-
-            
             ![densenet121 confusion matrix](image-7.png)
-
-            
             ![Resnet50 confusion matrix](image-8.png)
-
-            
             ![Xception confusion matrix](image-9.png)
 
             
@@ -104,14 +91,8 @@ Deployment
         * Streamlit App: 
             Deploy the ensemble model via a Streamlit web app, featuring a sidebar for image uploads, a main panel for displaying predictions (KL grade, confidence score, probability chart), and tailored recommendations (e.g., medications, physiotherapy).
             ![main UI](image-11.png)
-
-            
             ![Frontend for prediction](image-12.png)
-
-            
             ![frontend for classification](image-13.png)
-
-            
         * User Interaction: 
             Allow users to upload X-ray images (JPEG/PNG, up to 200 MB), trigger predictions with a "Predict" button, and view results with visual aids like a horizontal bar chart of probabilities.
 
