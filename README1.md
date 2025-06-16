@@ -114,10 +114,10 @@ Includes scripts for model training (densenet121.py, ResNet50.py, etc.) and data
 ### Python 3.10/3.11
 ### Conda (recommended for managing the virtual environment)
 ### Model files: 
-knee_xray_classifier1.keras
-100 epochs org dataset DenseNet121_ft.hdf5
-model_ResNet50_ft.hdf5
-model_Xception_ft.hdf5
+#### knee_xray_classifier1.keras
+#### 100 epochs org dataset DenseNet121_ft.hdf5
+#### model_ResNet50_ft.hdf5
+#### model_Xception_ft.hdf5
 ### Icon file:
 mdc.png
 ### dataset
@@ -158,52 +158,52 @@ mdc.png
     │   ├── Xception_testing_script.py        # Testing script for Xception model
     ├── README.md              # Project documentation
 ```
-usage:
-    * clone the repo
-    * install conda or miniconda
-        bash Miniconda3-latest-MacOSX-arm64.sh
-        or 
-        use the website to download
-    * create virtual environment
-        conda env create -f environment.yml
-        or
-        conda create --name myenv python=3.10
-    *activate environment
-        conda activate myenv
-    * To deactivate an active environment
-        conda deactivate
-    * Install Dependencies
-        pip install streamlit tensorflow numpy pillow plotly
-    * change directory 
-    * Run the Streamlit Web App
-        streamlit run app/app.py
-        This opens the app in your default browser (e.g., http://localhost:8501)
-    * Upload an Image
-        Use the sidebar to upload a knee X-ray image (PNG or JPEG).
-        The app verifies if the image is a knee X-ray.
-    * Get Predictions
-        Click the "Predict" button to run the ensemble model.
-        View the predicted grade, confidence score, and a bar chart of probabilities.
-        See recommended precautions or medications based on the grade.
-    * To stop the Streamlit app running in your terminal:
-        Ctrl + C
+## usage
+### clone the repo
+git clone <repo-url>
+### install conda or miniconda
+##### bash Miniconda3-latest-MacOSX-arm64.sh
+##### or 
+##### use the website to download
+### create virtual environment
+##### conda env create -f environment.yml
+##### or
+##### conda create --name myenv python=3.10
+### activate environment
+##### conda activate myenv
+### To deactivate an active environment
+##### conda deactivate
+### Install Dependencies
+##### pip install streamlit tensorflow numpy pillow plotly
+### change directory 
+### Run the Streamlit Web App
+###### streamlit run app/app.py
+This opens the app in your default browser (e.g., http://localhost:8501)
+##### Upload an Image
+Use the sidebar to upload a knee X-ray image (PNG or JPEG).
+The app verifies if the image is a knee X-ray.
+##### Get Predictions
+Click the "Predict" button to run the ensemble model.View the predicted grade, confidence score, and a bar chart of probabilities.See recommended precautions or medications based on the grade.
+##### To stop the Streamlit app running in your terminal:
+Ctrl + C
 
 
-Notes
-    * Model Files: 
-        Model files are large and not included in the repository. Contact the project maintainers to obtain them or train your own models using the scripts in src/.
-    * File Paths: 
-        The app uses absolute paths (e.g., C:\Users\Asus\Desktop\KOA_APP\src\models\). Update to relative paths (e.g., src/models/knee_xray_classifier1.keras) in app.py before running:
-        model = load_model('src/models/knee_xray_classifier1.keras', custom_objects={'InputLayer': InputLayer})
-    * Additional Scripts: 
-        Scripts like efficientnet.py and inception_resnet_v2.py are included but not used in the app. They were likely used for experimentation.
-    * Performance: Model loading and predictions may take time. Ensure at least 8GB RAM and a compatible GPU for faster inference.
-    * If you encounter GPU-related errors, ensure TensorFlow is compatible with your GPU and drivers (e.g., CUDA, cuDNN).
+## Notes
+### Model Files: 
+Model files are large and not included in the repository. Contact the project maintainers to obtain them or train your own models using the scripts in src/.
+### File Paths: 
+The app uses absolute paths (e.g., C:\Users\Asus\Desktop\KOA_APP\src\models\). Update to relative paths (e.g., src/models/knee_xray_classifier1.keras) in app.py before running:
+##### model = load_model('src/models/knee_xray_classifier1.keras', custom_objects={'InputLayer': InputLayer})
+### Additional Scripts: 
+Scripts like efficientnet.py and inception_resnet_v2.py are included but not used in the app. They were likely used for experimentation.
+### Performance: 
+Model loading and predictions may take time. Ensure at least 8GB RAM and a compatible GPU for faster inference.
+### If you encounter GPU-related errors, ensure TensorFlow is compatible with your GPU and drivers (e.g., CUDA, cuDNN).
 
 
-Contributions are welcome! To contribute:
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature`).
-3. Make changes and commit (`git commit -m "Add your feature"`).
-4. Push to your branch (`git push origin feature/your-feature`).
-Please ensure your code follows PEP 8 style guidelines and includes tests where applicable.
+## Contributions are welcome! To contribute:
+### Fork the repository.
+### Create a new branch (`git checkout -b feature/your-feature`).
+### Make changes and commit (`git commit -m "Add your feature"`).
+### Push to your branch (`git push origin feature/your-feature`).
+> Please ensure your code follows PEP 8 style guidelines and includes tests where applicable.
