@@ -202,8 +202,8 @@ Model loading and predictions may take time. Ensure at least 8GB RAM and a compa
 
 
 ## Contributions are welcome! To contribute:
-### Fork the repository.
-### Create a new branch (`git checkout -b feature/your-feature`).
-### Make changes and commit (`git commit -m "Add your feature"`).
-### Push to your branch (`git push origin feature/your-feature`).
+##### Fork the repository.
+##### Create a new branch (`git checkout -b feature/your-feature`).
+##### Make changes and commit (`git commit -m "Add your feature"`).
+##### Push to your branch (`git push origin feature/your-feature`).
 > Please ensure your code follows PEP 8 style guidelines and includes tests where applicable.
